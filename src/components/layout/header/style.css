@@ -1,0 +1,14 @@
+.header {
+    color: white;
+    margin: 2rem;
+}
+
+.header__login-button {
+    border-radius: 10px;
+    border: none;
+    padding: 8px 24px;
+    background-color: #1CD760;
+    color: black;
+    font-weight: 600;
+    width: 200px;
+}

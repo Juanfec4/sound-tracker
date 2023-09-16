@@ -1,26 +1,35 @@
-import { useState } from "react";
+import './styles/style.css';
+import Header from './components/layout/header'
+import UserProfile from './components/layout/userprofile'
+import { useEffect, useState } from 'react';
+import getToken from './helpers/getToken';
+import APIService from "./services/apiService";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [userData, setUserData] = useState("")
+  const [token, setToken] = useState("")
+  const [userDetails, setUserDetails] = useState("")
+  useEffect(()=>{
+    const URL = window.location.href;
+    let token = getToken(URL);
+    setToken(token)
+  },[])
 
+  useEffect(()=>{
+    if(token.access_token){
+      APIService.getTopItems('tracks', token.access_token).then((response)=> {
+        setUserData(response.data.items)
+      })
+      APIService.getUserDetails(token.access_token).then((response)=> {
+        setUserDetails(response.data)
+      })
+    }
+  },[token])
+  
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
+    <Header/>
+    <UserProfile userData={userData} userDetails={userDetails}/>
     </>
   );
 }
