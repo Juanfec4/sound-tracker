@@ -1,7 +1,7 @@
 import axios from "axios";
 
 var client_id = `${import.meta.env.VITE_CLIENT_ID}`;
-var redirect_uri = 'https://cuddly-memory-pwwr64px6wx3rpp7-5174.app.github.dev/';
+var redirect_uri = 'https://cuddly-memory-pwwr64px6wx3rpp7-5173.app.github.dev/';
 
 var scope = 'user-top-read user-read-recently-played user-read-private';
 

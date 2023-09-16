@@ -2,7 +2,6 @@
 import './style.css';
 
 function Userprofile({ userData , userDetails}) {
-    console.log(userData)
     let cache = new Set()
     let artists = []
     if(userData){
